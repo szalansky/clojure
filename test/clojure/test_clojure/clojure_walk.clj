@@ -11,8 +11,8 @@
          [:b {:b :b} (list 3 :c :b)])))
 
 (deftest t-stringify-keys
-  (is (= (w/stringify-keys {:a 1, nil {:b 2 :c 3}, :d 4})
-         {"a" 1, nil {"b" 2 "c" 3}, "d" 4})))
+  (is (= (w/stringify-keys {:a 1, nil {:b 2 :c 3}, :d 4, :e.f/g 5})
+         {"a" 1, nil {"b" 2 "c" 3}, "d" 4, "e.f/g" 5})))
 
 (deftest t-prewalk-order
   (is (= (let [a (atom [])]

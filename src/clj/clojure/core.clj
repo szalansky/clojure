@@ -1553,6 +1553,19 @@
   [^clojure.lang.Named x]
     (. x (getNamespace)))
 
+(defn full-name
+  "Returns the namespace/name String of a symbol or keyword,
+  or just name if namespace is not present."
+  {:tag String
+   :added "1.9"
+   :static true}
+  [^clojure.lang.Named x]
+    (let [x-namespace (namespace x)
+          x-name (name x)]
+      (if x-namespace
+        (str x-namespace "/" x-name)
+        x-name)))
+
 (defmacro locking
   "Executes exprs in an implicit do, while holding the monitor of x.
   Will release the monitor of x in all circumstances."
