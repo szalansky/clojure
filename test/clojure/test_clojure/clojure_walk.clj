@@ -15,11 +15,11 @@
          {"a" 1, nil {"b" 2 "c" 3}, "d" 4})))
 
 (deftest t-transform-keys
-  (is (= (w/transform-keys (fn [k]
+  (is (= (w/transform-keys {:a 1, nil {:b 2 :c 3}, :d 4, :e 5}
+                          (fn [k]
                              (if (keyword? k)
                                (str (name k) "-" (name k))
-                               k))
-                           {:a 1, nil {:b 2 :c 3}, :d 4, :e 5})
+                               k)))
          {"a-a" 1, nil {"b-b" 2 "c-c" 3}, "d-d" 4, "e-e" 5})))
 
 (deftest t-prewalk-order

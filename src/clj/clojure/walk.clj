@@ -93,7 +93,7 @@ the sorting function."}
 (defn transform-keys
   "Recursively transform all map keys using f as a transformation function."
   {:added "1.9"}
-  [f m]
+  [m f]
   (let [entry-f (fn [[k v]] [(f k) v])]
     ;; only apply to maps
     (postwalk (fn [x] (if (map? x) (into {} (map entry-f x)) x)) m)))
@@ -102,13 +102,13 @@ the sorting function."}
   "Recursively transforms all map keys from strings to keywords."
   {:added "1.1"}
   [m]
-  (transform-keys (fn [k] (if (string? k) (keyword k) k)) m))
+  (transform-keys m (fn [k] (if (string? k) (keyword k) k))))
 
 (defn stringify-keys
   "Recursively transforms all map keys from keywords to strings."
   {:added "1.1"}
   [m]
-  (transform-keys  (fn [k] (if (keyword? k) (name k) k)) m))
+  (transform-keys m (fn [k] (if (keyword? k) (name k) k))))
 
 (defn prewalk-replace
   "Recursively transforms form by replacing keys in smap with their
